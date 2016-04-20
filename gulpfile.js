@@ -98,4 +98,35 @@ gulp.task('minifycss', function () {
         .pipe(rename({suffix: '.min' }))
         .pipe(cssnano())//精简
         .pipe(gulp.dest('dist/css/'))
-})
+});
+
+
+//监听图片变化
+gulp.task('watchimage', function () {
+    gulp.watch('src/images/**/*', function (event) {
+        var paths = watchPath(event,'src/','dist/');
+
+        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
+        gutil.log('Dist ' + paths.distPath);
+
+        gulp.src(paths.srcPath)
+            .pipe(imagemin({
+                progressive: true
+            }))
+            .pipe(gulp.dest(paths.distDir))
+    })
+});
+//直接全部压缩
+gulp.task('image', function () {
+    gulp.src('src/images/**/*')
+        .pipe(imagemin({
+            progressive: true
+        }))
+        .pipe(gulp.dest('dist/images'))
+});
+
+//配置文件复制任务
+gulp.task('copy', function () {
+    gulp.src('src/fonts/**/*')
+        .pipe(gulp.dest('dist/fonts/'))
+});
