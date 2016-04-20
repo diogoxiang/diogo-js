@@ -1,0 +1,1 @@
+{"version":3,"sources":["a.js"],"names":["define","time","name","diogoxiang","ctime","s"],"mappings":"AAGAA,QACIC,KAAK,IACLC,KAAKC,WACLC,MAAM,QACNC,EAAE","file":"a.js","sourcesContent":["/**\r\n * Created by diogoxiang on 2016/4/20.\r\n */\r\ndefine({\r\n    time:100,\r\n    name:diogoxiang,\r\n    ctime:'sssss',\r\n    s:\"ssss\"\r\n});"],"sourceRoot":"/source/"}

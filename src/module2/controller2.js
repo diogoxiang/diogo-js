@@ -1,7 +1,7 @@
 /**
  * Created by diogoxiang on  2016年4月20日13:44:08
  */
-define(['text!module2/tpl.html'], function (tpl) {
+define(['text!module2/tpl.html','../js/a'], function (tpl) {
 
     var controller = function (name) {
         appView.html(_.template(tpl, {name: name?name:'vivi'}));
