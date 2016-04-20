@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>A Gentle Introduction 2</title>
+
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+
+    <script
+            src="https://rawgit.com/flatiron/director/master/build/director.min.js">
+    </script>
+
+    <script>
+        $('document').ready(function() {
+            //
+            // create some functions to be executed when
+            // the correct route is issued by the user.
+            //
+            var showAuthorInfo = function () { console.log("showAuthorInfo"); };
+            var listBooks = function () { console.log("listBooks"); };
+
+            var allroutes = function() {
+                var route = window.location.hash.slice(2);
+                console.log(window.location.hash);
+                var sections = $('section');
+                var section;
+
+                section = sections.filter('[data-route=' + route + ']');
+                console.log(section);
+                if (section.length) {
+                    sections.hide(250);
+                    section.show(250);
+                }
+            };
+
+            //
+            // define the routing table.
+            //
+            var routes = {
+                '/author': showAuthorInfo,
+                '/books': listBooks
+            };
+
+            //
+            // instantiate the router.
+            //
+            var router = Router(routes);
+
+            //
+            // a global configuration setting.
+            //
+            router.configure({
+                on: allroutes
+            });
+
+            router.init();
+        });
+    </script>
+</head>
+
+<body>
+<section data-route="author">Author Name</section>
+<section data-route="books">Book1, Book2, Book3</section>
+<ul>
+    <li><a href="#/author">#/author</a></li>
+    <li><a href="#/books">#/books</a></li>
+</ul>
+</body>
+</html>
