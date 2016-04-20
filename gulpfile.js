@@ -1,28 +1,31 @@
 /**
  * Created by diogoxiang on 2016/4/20.
  */
-var gulp = require('gulp');
-var gutil = require('gulp-util'); //让命令行输出的文字带颜色
-var uglify = require('gulp-uglify'); //丑化(Uglify)
-var cssnano = require('gulp-cssnano');  // 获取 minify-css 模块（用于压缩 CSS）这个是最新的
-var imagemin = require('gulp-imagemin');  // 获取 gulp-imagemin 模块
-var sass = require('gulp-ruby-sass');     // 获取 gulp-ruby-sass 模块
-var rename = require('gulp-rename');      //重命名
-var concat  = require('gulp-concat');     //合并文件
-var watchPath = require('gulp-watch-path');//实际上我们只需要重新编译被修改的文件
-var combiner = require('stream-combiner2');//监听错误
-var sourcemaps = require('gulp-sourcemaps');//map调试
-var clean = require('gulp-clean');        //清空文件夹
+var gulp = require('gulp'),
+    gutil = require('gulp-util'), //让命令行输出的文字带颜色
+    uglify = require('gulp-uglify'), //丑化(Uglify)
+    cssnano = require('gulp-cssnano'),  // 获取 minify-css 模块（用于压缩 CSS）这个是最新的
+    imagemin = require('gulp-imagemin'),  // 获取 gulp-imagemin 模块
+    sass = require('gulp-ruby-sass'),    // 获取 gulp-ruby-sass 模块
+    rename = require('gulp-rename'),      //重命名
+    concat  = require('gulp-concat'),     //合并文件
+    watchPath = require('gulp-watch-path'),//实际上我们只需要重新编译被修改的文件
+    combiner = require('stream-combiner2'),//监听错误
+    sourcemaps = require('gulp-sourcemaps'),//map调试
+    clean = require('gulp-clean');        //清空文件夹
+var inject=require('gulp-inject'); // 功能 很强大的插入数据插件
 
 var handleError = function (err) {
     var colors = gutil.colors;
-    console.log('\n')
-    gutil.log(colors.red('Error!'))
-    gutil.log('fileName: ' + colors.red(err.fileName))
-    gutil.log('lineNumber: ' + colors.red(err.lineNumber))
-    gutil.log('message: ' + err.message)
+    console.log('\n');
+    gutil.log(colors.red('Error!'));
+    gutil.log('fileName: ' + colors.red(err.fileName));
+    gutil.log('lineNumber: ' + colors.red(err.lineNumber));
+    gutil.log('message: ' + err.message);
     gutil.log('plugin: ' + colors.yellow(err.plugin))
-}
+};
+
+var distpath='dist/';
 //默认方法
 gulp.task('default', function () {
     gutil.log('message');
@@ -30,9 +33,25 @@ gulp.task('default', function () {
     gutil.log(gutil.colors.green('message:') + "some");
 });
 
-//配置 JS 任务
+
+//合并js模块
+gulp.task('buildJs',function () {
+
+    var combined = combiner.obj([
+        gulp.src('src/js/verdor/*.js'),
+        concat('verdor.js'),
+        uglify(),
+        gulp.dest('dist/js')
+    ]);
+
+    combined.on('error', handleError);
+
+
+});
+
+//配置 JS 任务 压缩JS
 gulp.task('uglifyjs', function () {
-    gulp.src('src/js/**/*.js')
+    gulp.src('src/js/*.js')
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'))
 });
@@ -49,7 +68,7 @@ gulp.task('watchjs', function () {
          srcFilename: 'log.js',
          distFilename: 'log.js' }
          */
-        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath)
+        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
         gutil.log('Dist ' + paths.distPath);
 
         var combined = combiner.obj([
@@ -67,10 +86,10 @@ gulp.task('watchjs', function () {
 
 gulp.task('watchcss', function () {
     gulp.watch('src/css/**/*.css', function (event) {
-        var paths = watchPath(event, 'src/', 'dist/')
+        var paths = watchPath(event, 'src/', 'dist/');
 
-        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath)
-        gutil.log('Dist ' + paths.distPath)
+        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
+        gutil.log('Dist ' + paths.distPath);
 
         gulp.src(paths.srcPath)
             .pipe(sourcemaps.init())
@@ -129,4 +148,10 @@ gulp.task('image', function () {
 gulp.task('copy', function () {
     gulp.src('src/fonts/**/*')
         .pipe(gulp.dest('dist/fonts/'))
+});
+
+//清理 dist 目录 的数据
+gulp.task('cleanDist',function () {
+    return gulp.src('dist', {read: false})
+        .pipe(clean());
 });
