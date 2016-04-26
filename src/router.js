@@ -20,6 +20,7 @@ define(['director', 'underscore'], function (Router, _) {
         return function () {
             var url = config;
             var params = arguments;
+            console.log(params)
             require([url], function (controller) {
                 if(currentController && currentController !== controller){
                     currentController.onRouteChange && currentController.onRouteChange();
@@ -34,5 +35,8 @@ define(['director', 'underscore'], function (Router, _) {
         routes[key] = routeHandler(routes[key]);
     }
 
+
+
+    //学习记录
     return Router(routes);
 });
