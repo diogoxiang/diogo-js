@@ -3,7 +3,7 @@
  */
 define({
     time:100,
-    name:diogoxiang,
+    name:"dioso",
     ctime:'sssss',
     s:"ssss"
 });
