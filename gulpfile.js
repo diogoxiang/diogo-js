@@ -13,7 +13,7 @@ var gulp = require('gulp'),
     combiner = require('stream-combiner2'),//监听错误
     sourcemaps = require('gulp-sourcemaps'),//map调试
     clean = require('gulp-clean');        //清空文件夹
-var inject=require('gulp-inject'); // 功能 很强大的插入数据插件
+///var inject=require('gulp-inject'); // 功能 很强大的插入数据插件
 
 var handleError = function (err) {
     var colors = gutil.colors;

@@ -39,6 +39,7 @@ describe("validators", function() {
         expect( v.isPhone('13611779473') ).to.be.true;
         expect( v.isPhone('+8613611779473') ).to.be.true;
         expect( v.isPhone('+23613611779473') ).to.be.true;
+        expect( v.isPhone('+18874505982') ).to.be.false;
     });
 
 });
