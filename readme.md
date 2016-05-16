@@ -5,7 +5,5 @@ README.md
 
 # 新增 chai mocha mocha-phantomjs 单元测试
 
-#测试001
-
-#测试002
-#测试002
+* 学习 router 与require 的结合
+* 学习单元测试
