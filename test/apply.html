@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+
+<script>
+//<!--基本用法-->
+
+function add(a,b)
+{
+    console.log(a+b);
+}
+function sub(a,b)
+{
+    alert("ssss")
+    console.log(a-b);
+}
+
+add.apply(sub,[3,1]);
+add.call(sub,3,1);
+
+//  --------------实现继承：
+
+    function Animal(name){
+        this.name = name;
+        this.showName = function(){
+
+            console.log(this.name);
+        }
+    }
+
+    function Cat(name){
+        Animal.apply(this, [name]);
+        Animal.call(this, name);
+    }
+
+    var cat = new Cat("Black Cat");
+    cat.showName();
+    console.log(cat.name)
+
+
+//    --------------------
+
+var name = 'outs';
+
+var o1 = {
+    name: 'hello'
+};
+
+var o2 = {
+    name: 'world'
+};
+
+function sayName() {
+    console.log(this.name);
+}
+
+sayName.call(this); // outs
+sayName.call(window); // outs
+sayName.call(o1); // hello
+sayName.call(o2); // world
+//那么，使用call和apply有什么好处呢？我们发现，同样的一个函数，当指定不同的执行环境时，会产生不同的结果，这么做的一个最大的好处就是解耦。
+
+//    ----------------
+var zhangsan = {
+    cut: function() {
+        console.log(this.tree);
+    }
+};
+
+var lisi = {
+    tree: '杨树'
+};
+zhangsan.cut.call(lisi); // alert('杨树')
+
+
+//------------
+
+//call和apply调用
+//call和apply可以动态的地改变传入函数的this：
+//
+//全选复制放进笔记
+var obj1={
+    name:'sven',
+    getName:function(){
+        return this.name;
+    }
+};
+
+var obj2={
+    name:'anne'
+};
+
+console.log(obj1.getName());
+console.log(obj1.getName.call(obj2));
+</script>
+</body>
+</html>
