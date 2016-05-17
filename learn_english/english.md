@@ -5,4 +5,4 @@
 * mask 面具,标记
 * interest 爱好.
 * share 分享
-* 
+* might 权力,可以
