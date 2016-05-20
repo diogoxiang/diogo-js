@@ -163,3 +163,50 @@ gulp.task('copydir', function () {
     gulp.src('src/js/**/*')
         .pipe(gulp.dest('../name/'))
 });
+
+
+//测试目录 监听
+
+gulp.task('watchTestsass',function () {
+    var cssSrc = 'test/ranking/sass/*.scss',
+        cssSrca= 'test/ranking/css';//源码也输出一份
+
+    gulp.watch('test/ranking/sass/**/*.scss', function (event) {
+        var paths = watchPath(event,'test/ranking/sass/','test/ranking/css/');
+
+        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
+        gutil.log('Dist ' + paths.distPath);
+
+        gulp.src(paths.srcPath)
+        return sass(cssSrc, {style: 'expanded'})
+            .pipe(gulp.dest(cssSrca))
+            .pipe(rename({suffix: '.min' }))
+            .pipe(cssnano())//精简
+            .pipe(gulp.dest(cssSrca))
+            .on('error', function (err) {
+                console.error('Error!', err.message);
+            });
+
+    })
+
+
+
+});
+
+gulp.task('sass', function() {
+    var cssSrc = './src/sass/*.scss',
+        cssSrca= './src/css';//源码也输出一份
+
+
+    gulp.src(cssSrc)
+    // .pipe(sass({ style: 'expanded'}))
+    return sass(cssSrc, {style: 'expanded'})
+        .pipe(gulp.dest(cssSrca))
+        .pipe(rename({suffix: '.min' }))
+        .pipe(cssnano())//精简
+        .pipe(gulp.dest(cssSrca))
+        .on('error', function (err) {
+            console.error('Error!', err.message);
+        });
+
+});
