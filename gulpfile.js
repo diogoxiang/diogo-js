@@ -155,3 +155,11 @@ gulp.task('cleanDist',function () {
     return gulp.src('dist', {read: false})
         .pipe(clean());
 });
+
+
+
+//配置文件复制任务 复制文件到 上一级目录中去
+gulp.task('copydir', function () {
+    gulp.src('src/js/**/*')
+        .pipe(gulp.dest('../name/'))
+});
