@@ -145,6 +145,9 @@ html, body {
 }
 .am-body .list li .username {
   font-size: 0.27rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .am-body .list li .money, .am-body .list li .integral {
   font-size: 0.27rem;

@@ -48,6 +48,10 @@
 
     tool.ajax('data/data.json',function(dt){
 
+        var html=template('rankList',dt);
+        
+        document.getElementById('list').innerHTML = html;
+        
         console.log(dt.rankList.length)
 
     })
