@@ -4,15 +4,15 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'), //让命令行输出的文字带颜色
     uglify = require('gulp-uglify'), //丑化(Uglify)
-    cssnano = require('gulp-cssnano'),  // 获取 minify-css 模块（用于压缩 CSS）这个是最新的
-    imagemin = require('gulp-imagemin'),  // 获取 gulp-imagemin 模块
-    sass = require('gulp-ruby-sass'),    // 获取 gulp-ruby-sass 模块
-    rename = require('gulp-rename'),      //重命名
-    concat  = require('gulp-concat'),     //合并文件
-    watchPath = require('gulp-watch-path'),//实际上我们只需要重新编译被修改的文件
-    combiner = require('stream-combiner2'),//监听错误
-    sourcemaps = require('gulp-sourcemaps'),//map调试
-    clean = require('gulp-clean');        //清空文件夹
+    cssnano = require('gulp-cssnano'), // 获取 minify-css 模块（用于压缩 CSS）这个是最新的
+    imagemin = require('gulp-imagemin'), // 获取 gulp-imagemin 模块
+    sass = require('gulp-ruby-sass'), // 获取 gulp-ruby-sass 模块
+    rename = require('gulp-rename'), //重命名
+    concat = require('gulp-concat'), //合并文件
+    watchPath = require('gulp-watch-path'), //实际上我们只需要重新编译被修改的文件
+    combiner = require('stream-combiner2'), //监听错误
+    sourcemaps = require('gulp-sourcemaps'), //map调试
+    clean = require('gulp-clean'); //清空文件夹
 ///var inject=require('gulp-inject'); // 功能 很强大的插入数据插件
 
 var handleError = function (err) {
@@ -27,12 +27,11 @@ var handleError = function (err) {
 
 var distpath='dist/';
 //默认方法
-gulp.task('default', function () {
+gulp.task('default', function() {
     gutil.log('message');
     gutil.log(gutil.colors.red('error'));
     gutil.log(gutil.colors.green('message:') + "some");
 });
-
 
 //合并js模块
 gulp.task('buildJs',function () {
@@ -50,7 +49,7 @@ gulp.task('buildJs',function () {
 });
 
 //配置 JS 任务 压缩JS
-gulp.task('uglifyjs', function () {
+gulp.task('uglifyjs', function() {
     gulp.src('src/js/*.js')
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'))
@@ -90,7 +89,6 @@ gulp.task('watchcss', function () {
 
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
         gutil.log('Dist ' + paths.distPath);
-
         gulp.src(paths.srcPath)
             .pipe(sourcemaps.init())
             .pipe(autoprefixer({
@@ -121,9 +119,9 @@ gulp.task('minifycss', function () {
 
 
 //监听图片变化
-gulp.task('watchimage', function () {
-    gulp.watch('src/images/**/*', function (event) {
-        var paths = watchPath(event,'src/','dist/');
+gulp.task('watchimage', function() {
+    gulp.watch('src/images/**/*', function(event) {
+        var paths = watchPath(event, 'src/', 'dist/');
 
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
         gutil.log('Dist ' + paths.distPath);
