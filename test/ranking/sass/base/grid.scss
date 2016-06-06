@@ -1,0 +1,139 @@
+@charset "UTF-8";
+//主要用于 当前的一些变量
+$main-bg:                 #ffae5b;
+$c-one:               #ffe71a;
+$c-two:               #b9dbf9;
+$c-three:             #ff6c65;
+$c-four:              #ffd399;
+html,body{
+    background: $main-bg;
+    overflow-y: auto;
+}
+
+.#{$ns}container {
+    @include center-block();
+    width:7.5rem;
+
+}
+.#{$ns}head, .#{$ns}foot{
+    @include center-block();
+    width: 100%;
+    height: 3.5rem;
+    text-align: center;
+    //background: url("../img/head.png") top center no-repeat;
+    img{
+        width: 98%;
+
+    }
+}
+
+.#{$ns}body{
+    @include center-block();
+    width: 92%;
+    overflow: hidden;
+    .list{
+        li{
+            //max-width: 5rem;
+            @include border-radius();
+            background: $c-four;
+            margin: 0.1rem auto;
+            padding: 0.1rem 0.2rem;
+            height: 0.8rem;
+            line-height: 0.8rem;
+
+            i{
+                //float: left;
+                @include square(0.6rem);
+                text-align: center;
+                display: block;
+                position: relative;
+                img{
+                    width: 96%;
+
+                }
+
+            }
+
+            span{
+                &:first-child{
+                    width: 20%;
+
+                }
+                width: 25%;
+                text-align: center;
+                line-height: 0.8rem;
+                float: left;
+            }
+            .ranking{
+                text-align: center;
+            }
+            .username{
+                font-size: 0.27rem;
+                @include text-truncate();
+            }
+            .money, .integral {
+                font-size: 0.27rem;
+                float: right;
+                font-weight: 700;
+            }
+
+        }
+        li.no1, li.no2, li.no3 {
+            height: 1rem;
+            i{
+                float: left;
+                @include square(1rem);
+                text-align: center;
+                img{
+                    width: 96%;
+
+                }
+            }
+            span{
+                &:first-child{
+                    width: 20%;
+
+                }
+                width: 25%;
+                text-align: center;
+                line-height: 1rem;
+                //float: left;
+            }
+
+        }
+        .no1{
+            background: $c-one;
+        }
+        .no2{
+            background: $c-two;
+
+        }
+        .no3{
+            background: $c-three;
+        }
+        //.icon1, .icon2, .icon3 {
+        //    background: url("../img/jiangpai.png") top left no-repeat;
+        //}
+        //.icon2{
+        //    background-position:left -100px ;
+        //}
+        //.icon3{
+        //    background-position:left -200px ;
+        //}
+    }
+
+}
+
+.#{$ns}foot{
+    @include center-block();
+    width: 100%;
+    height: 2em;
+    text-align: center;
+    //background: url("../img/head.png") top center no-repeat;
+    position: absolute;
+    bottom: 1rem;
+    img{
+        width: 98%;
+
+    }
+}

@@ -40,5 +40,17 @@
         router.init();                      //开始监控url变化
     });
 
+    /**
+     * @return {[type]}
+     */
+    function tia(){
+        var  tit= 2;
+        var a = 1;
+        var bddd = 1;
+
+            //console.log
+       
+
+    }
 
 })(window);
